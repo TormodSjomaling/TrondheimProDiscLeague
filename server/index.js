@@ -4,10 +4,12 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import playerRoutes from './routes/players.js';
+import roundsRoutes from './routes/rounds.js';
 
 const app = express();
 
 app.use('/api', playerRoutes);
+app.use('/api', roundsRoutes);
 
 app.use(bodyParser.json({ limit: "30mb", exteded: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
