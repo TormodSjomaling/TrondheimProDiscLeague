@@ -5,7 +5,7 @@ let testDataRound1 = "PlayerName,CourseName,LayoutName,Dato,Totalt,+/-,Hole1,Hol
 "Martin,Dragvoll Diskgolfarena,Dragvoll 2021,2021-03-27 10:36,68,12,3,6,2,4,5,4,3,4,3,4,3,3,4,4,3,4,6,3 \n" +
 "Morten,Dragvoll Diskgolfarena,Dragvoll 2021,2021-03-27 10:36,70,14,3,5,3,3,3,5,5,4,4,3,7,3,3,4,3,4,4,4";
 
-function csvJSON(csv){
+const csvJsonReader = (csv) =>{
 
     var lines=csv.split("\n");
   
@@ -34,5 +34,7 @@ function csvJSON(csv){
     return JSON.stringify(roundDocumentJson);
   }
 
-let result = csvJSON(testDataRound1);
-console.log(result)
+//let result = csvJsonReader(testDataRound1);
+//console.log(result)
+
+export default csvJsonReader;
