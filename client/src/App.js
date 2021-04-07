@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { AppBar, Container, Grid, Grow, Typography, Tab, Tabs, 
     TableContainer, Table, TableCell, TableRow, TableHead, 
-    TableBody, Paper, Button} from '@material-ui/core'
+    TableBody, Paper, Button, CircularProgress } from '@material-ui/core'
 import TableChartIcon from '@material-ui/icons/TableChart';
 import GolfCourseIcon from '@material-ui/icons/GolfCourse';
 
@@ -32,7 +32,12 @@ const App = () => {
         var jsonFile = csvJsonReader(textFile, rounds.length)
         dispatch(createRound(jsonFile))
     }
-    
+
+    //const players1 = rounds[0].results
+    //for(var i =0; i<players1.length;i++){
+    //        console.log(players1[i].PlayerName)
+    //}
+
     return(
         <Container maxidth="lg">
             <AppBar position="static" color="inherit">
@@ -42,7 +47,7 @@ const App = () => {
                     <Tab icon={<GolfCourseIcon/>} label="Item Two"/>
                 </Tabs>
             </AppBar>
-            <h1 align="center"></h1>
+            <h1 align="center">test</h1>
             <Grow in>
                 <Container>
                     <Grid container justify="space-between" alignItems="stretch" spacing={3}>
@@ -60,10 +65,10 @@ const App = () => {
                                 </TableHead>
                                 <TableBody>
                                     <TableRow >
-                                    <TableCell component="th" scope="row">Tormod Sjømæling</TableCell>
-                                    <TableCell align="right">1</TableCell>
-                                    <TableCell align="right">65</TableCell>
-                                    <TableCell align="right">7,5</TableCell>
+                                        <TableCell component="th" scope="row">Tormod Sjømæling</TableCell>
+                                        <TableCell align="right">1</TableCell>
+                                        <TableCell align="right">65</TableCell>
+                                        <TableCell align="right">7,5</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -73,7 +78,7 @@ const App = () => {
                             <Typography variant="h5">Add round results:</Typography>
                             <Paper>
                                 <form autoComplete="off" noValidate onSubmit={onSubmit}>
-                                    <input type="file" id="csv" onChange={onChange}/>
+                                    <input type="file" id="csv" accept=".csv" onChange={onChange}/>
                                     <Button variant="contained" color="primary" size="medium" type="submit" fullWidth>Submit</Button>
                                     <output id="out">file contents will appear here</output>
                                 </form>
