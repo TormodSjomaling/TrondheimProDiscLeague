@@ -24,9 +24,8 @@ export const getRoundsByPlayerName = async (req, res) => {
 export const addNewRound = async (req, res) => {
     try {
         const newRoundJson = req.body;
-        console.log(newRoundJson.round)
-
         const playerResults = [];
+        
         for(var i=0;i<newRoundJson.results.length;i++){
             const playerResult = new PlayerResult()
             playerResult.PlayerName = newRoundJson.results[i].PlayerName,

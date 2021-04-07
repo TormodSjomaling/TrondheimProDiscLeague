@@ -29,20 +29,20 @@ const App = () => {
         const file = document.getElementById('csv').files[0];
         const textFile = await file.text();
 
-        var jsonFile = csvJsonReader(textFile)
+        var jsonFile = csvJsonReader(textFile, rounds.length)
         dispatch(createRound(jsonFile))
     }
-
+    
     return(
         <Container maxidth="lg">
             <AppBar position="static" color="inherit">
                 <Typography variant="h2" align="center">Trondheim Disc Golf Association</Typography>
-                <Tabs centered align="center" aria-label="simple tabs example">
+                <Tabs centered aria-label="simple tabs example">
                     <Tab icon={<TableChartIcon/>} label="Item One"/>
                     <Tab icon={<GolfCourseIcon/>} label="Item Two"/>
                 </Tabs>
             </AppBar>
-            <h1 align="center">Test</h1>
+            <h1 align="center"></h1>
             <Grow in>
                 <Container>
                     <Grid container justify="space-between" alignItems="stretch" spacing={3}>
@@ -75,10 +75,8 @@ const App = () => {
                                 <form autoComplete="off" noValidate onSubmit={onSubmit}>
                                     <input type="file" id="csv" onChange={onChange}/>
                                     <Button variant="contained" color="primary" size="medium" type="submit" fullWidth>Submit</Button>
+                                    <output id="out">file contents will appear here</output>
                                 </form>
-                                <output id="out">
-                                    file contents will appear here
-                                </output>
                             </Paper>
                         </Grid>
                     </Grid>
