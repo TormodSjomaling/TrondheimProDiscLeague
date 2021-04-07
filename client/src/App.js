@@ -23,15 +23,14 @@ const App = () => {
         const textFile = await file.text();
 
         document.getElementById('out').innerHTML = textFile;
-        var jsonFile = csvJsonReader(textFile)
-        dispatch(createRound(jsonFile))
     }
 
     const onSubmit = async () => {
         const file = document.getElementById('csv').files[0];
         const textFile = await file.text();
-    
-        dispatch(createRound(textFile))
+
+        var jsonFile = csvJsonReader(textFile)
+        dispatch(createRound(jsonFile))
     }
 
     return(

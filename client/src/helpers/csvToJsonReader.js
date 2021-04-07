@@ -1,7 +1,7 @@
 const csvJsonReader = (csv) =>{
     var lines=csv.split("\n");
 
-    var roundDocumentJson = {round: 4, par: {}, results: []};
+    var roundDocumentJson = {round: 5, par: {}, results: []};
     var headers=lines[0].split(",");
 
     for(var i=1;i<lines.length;i++){
