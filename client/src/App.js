@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { AppBar, Container, Grid, Grow, Typography, Tab, Tabs, 
     TableContainer, Table, TableCell, TableRow, TableHead, 
@@ -6,7 +6,34 @@ import { AppBar, Container, Grid, Grow, Typography, Tab, Tabs,
 import TableChartIcon from '@material-ui/icons/TableChart';
 import GolfCourseIcon from '@material-ui/icons/GolfCourse';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getRounds, createRound } from './actions/round'
+import csvJsonReader from './helpers/csvToJsonReader.js'
+
 const App = () => {
+    const dispatch = useDispatch();
+    const rounds = useSelector((state) => state.rounds)
+
+    useEffect(() => {
+        dispatch(getRounds());
+    }, [dispatch]);
+
+    const onChange = async () => {
+        const file = document.getElementById('csv').files[0];
+        const textFile = await file.text();
+
+        document.getElementById('out').innerHTML = textFile;
+        var jsonFile = csvJsonReader(textFile)
+        dispatch(createRound(jsonFile))
+    }
+
+    const onSubmit = async () => {
+        const file = document.getElementById('csv').files[0];
+        const textFile = await file.text();
+    
+        dispatch(createRound(textFile))
+    }
+
     return(
         <Container maxidth="lg">
             <AppBar position="static" color="inherit">
@@ -46,10 +73,13 @@ const App = () => {
                         <Grid item xs={12} sm={4}>
                             <Typography variant="h5">Add round results:</Typography>
                             <Paper>
-                                <form autoComplete="off" noValidate>
-                                    <input type="file" name="file"/>
+                                <form autoComplete="off" noValidate onSubmit={onSubmit}>
+                                    <input type="file" id="csv" onChange={onChange}/>
+                                    <Button variant="contained" color="primary" size="medium" type="submit" fullWidth>Submit</Button>
                                 </form>
-                                <Button variant="contained" color="primary" size="medium" type="submit" fullWidth>Submit</Button>
+                                <output id="out">
+                                    file contents will appear here
+                                </output>
                             </Paper>
                         </Grid>
                     </Grid>

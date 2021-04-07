@@ -8,12 +8,12 @@ import roundsRoutes from './routes/rounds.js';
 
 const app = express();
 
-app.use('/api', playerRoutes);
-app.use('/api', roundsRoutes);
-
-app.use(bodyParser.json({ limit: "30mb", exteded: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors());
+app.use(bodyParser.json({ limit: "200mb", exteded: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
+
+app.use('/api', roundsRoutes);
+app.use('/api', playerRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://admin:admin@trondheimprodiscleague.jrk2w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
