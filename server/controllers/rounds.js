@@ -1,3 +1,4 @@
+import { Placement } from '../models/placement.js';
 import { PlayerResult } from '../models/playerResult.js';
 import Round from '../models/round.js';
 
@@ -43,6 +44,7 @@ export const getRoundsByPlayerName = async (req, res) => {
 export const addNewRound = async (req, res) => {
     try {
         const newRoundJson = req.body;
+        console.log(newRoundJson)
         const playerResults = [];
         
         for(var i=0;i<newRoundJson.results.length;i++){
@@ -103,8 +105,15 @@ export const addNewRound = async (req, res) => {
             Hole18: newRoundJson.par.Hole18
         })
 
+        const placement = new Placement({
+          Tormod: newRoundJson.placements.Tormod,
+          Martin: newRoundJson.placements.Martin,
+          Andreas: newRoundJson.placements.Andreas,
+        })
+
         const round = new Round({
             round: newRoundJson.round,
+            placements: placement,
             par: playerResult,
             results: playerResults
         })

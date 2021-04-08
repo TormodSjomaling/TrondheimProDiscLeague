@@ -33,11 +33,6 @@ const App = () => {
         dispatch(createRound(jsonFile))
     }
 
-    //const players1 = rounds[0].results
-    //for(var i =0; i<players1.length;i++){
-    //        console.log(players1[i].PlayerName)
-    //}
-
     return(
         <Container maxidth="lg">
             <AppBar position="static" color="inherit">
