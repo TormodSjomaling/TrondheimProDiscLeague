@@ -13,7 +13,26 @@ export const getRounds = async (req, res) => {
 
 export const getRoundsByPlayerName = async (req, res) => {
     try {
-        const rounds = await Round.find({}, { round: 1, results: {PlayerName: 1, "+/-":1 }})
+        const rounds = await Round.aggregate([
+            {
+              $unwind: "$results"
+            },
+            {
+              $group: {
+                _id: "$results.PlayerName",
+                throws: {
+                  $sum: {
+                    $toInt: "$results.Totalt"
+                  }
+                },
+                "total+/-": {
+                  $sum: {
+                    $toInt: "$results.+/-"
+                  }
+                }
+              }
+            },
+          ])
 
         res.status(200).json(rounds)
     } catch (error) {
